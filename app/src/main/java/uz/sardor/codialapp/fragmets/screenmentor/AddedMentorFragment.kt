@@ -97,7 +97,19 @@ class AddedMentorFragment : Fragment(), MentorsAdapter.RVClickMentors {
 
 
         view.tvSave.setOnClickListener {
-            //save Data
+            //get EditText Data
+            val name = view.edtMentorsName.text.toString()
+            val surname = view.edtMentorsSurname.text.toString()
+            val patroni = view.edtMentorsPatronymic.text.toString()
+
+            if (name.isNotEmpty() && surname.isNotEmpty() && patroni.isNotEmpty()) {
+                dbHelper.upDateMentor(MentorsData(mentors.id, surname, name, patroni, course))
+            }
+            view.edtMentorsName.text!!.clear()
+            view.edtMentorsSurname.text!!.clear()
+            view.edtMentorsPatronymic.text!!.clear()
+            initData()
+            dialog.cancel()
         }
 
 
